@@ -1,0 +1,258 @@
+<div class="ui doubling padded grid">
+
+  <!-- INICIO FILTROS -->
+  <div class="three wide widescreen five wide computer eigth wide table sixteen wide mobile column white" style="min-height: 96%;box-shadow: 2px 2px 10px #BBB;">
+    <h2 class="header">Filtros
+        <div id="actualizar-resumen" class="circular ui icon button teal right floated" ng-click="actualizarResumen()">Actualizar <i class="refresh icon"></i></div>
+    </h2>
+
+    <!-- INICIO AÑO -->
+    <div id="anio" class="item filtros" style="margin-bottom: 5px">
+        <select ng-model="anioSelected" class="ui fluid search dropdown">
+            <option value="">Año</option>
+            <option value="{$ anio $}" ng-repeat="anio in anios">{$ anio $}</option>
+        </select>
+    </div>
+    <!-- FIN AÑO -->
+
+      <div filtro-ubicacion callback="activar_filtro" activado="checkFiltros.ubicacionCheck" seleccionados="ubicacionesSeleccionadas"
+                      multiple="true"></div>
+{#    <!-- INICIO UBICACION -->#}
+{#    <div id="ubicacion" class="ui labels top attached segment teal">#}
+{#      <div class="ui teal label">Ubicación#}
+{#      </div>#}
+{#      <div class="ui toggle checkbox" style="float: right;">#}
+{#        <input id="ubicacion-check" ng-model="ubicacionCheck" type="checkbox" name="public">#}
+{#        <label for="ubicacion-check"></label>#}
+{#      </div>#}
+{#      <div id="ubicacion-departamento" class="item filtros dropdown" style="margin-bottom: 5px">#}
+{#          <select ng-model="departamentoSelected" class="ui fluid search dropdown">#}
+{#              <option value="">Departamento</option>#}
+{#              <option value="{$ ubicacion.id $}" ng-repeat="ubicacion in ubicaciones">{$ ubicacion.nombre $}</option>#}
+{#          </select>#}
+{#      </div>#}
+{#      <div id="ubicacion-distrito" class="item filtros dropdown" style="margin-bottom: 5px">#}
+{#          <select ng-model="distritoSelected" class="ui fluid search dropdown">#}
+{#              <option value="">Distrito</option>#}
+{#              <option value="{$ distrito.id $}" ng-repeat="distrito in distritos">{$ distrito.nombre $}</option>#}
+{#          </select>#}
+{#      </div>#}
+{#      <div id="ubicacion-barrio" class="item filtros dropdown" style="margin-bottom: 5px">#}
+{#          <select ng-model="barrioSelected" class="ui fluid search dropdown">#}
+{#              <option value="">Barrio/Localidad</option>#}
+{#              <option  value="{$ barrio.id $}" ng-repeat="barrio in barrios">{$ barrio.nombre $}</option>#}
+{#          </select>#}
+{#      </div>#}
+{#      <button class="ui basic button" ng-click="agregarUbicacion()"><i class="plus circle icon"></i>Agregar</button>#}
+{#      <button class="ui basic button" ng-click="limpiarUbicacion()"><i class="erase icon "></i>Limpiar</button>#}
+{#    </div>#}
+{#    <!-- MEDIO UBICACION -->#}
+{##}
+{#    <div id="ubicacion-labels" class="ui bottom attached segment">#}
+{#      <button title="Borrar todo" ng-click="borrarUbicaciones()" class="ui circular icon basic button red" style="float:right"><i class="trash outline icon "></i></button>#}
+{##}
+{#    </div>#}
+{#    <!-- FIN UBICACION -->#}
+
+    <!-- INICIO PRIORIDAD -->
+    <div class="ui labels segment teal">
+      <div class="ui teal label">Tipo de prioridad</div>
+      <div class="ui checkbox" style="float: right;">
+        <input id="prioridad-check" ng-model="checkFiltros.prioridadCheck" ng-checked="checkFiltros.prioridadCheck" ng-change="activar_filtro()" type="checkbox" name="public">
+        <label for="prioridad-check"></label>
+      </div>
+      <b ng-if="checkFiltros.prioridadCheck" ng-click="checkFiltros.prioridadCheck = false; activar_filtro()" style="float: right">Activado&nbsp;&nbsp;</b>
+      <b ng-if="!checkFiltros.prioridadCheck" ng-click="checkFiltros.prioridadCheck = true; activar_filtro()" style="float: right; opacity: 0.5">Desactivado&nbsp;&nbsp;</b>
+      <div class="ui two column grid">
+          <div class="column">
+              <div class="ui checkbox column">
+                  <input ng-model="prioridadesSeleccionadas.sanitarios" id="prioridad-sanitarios" type="checkbox" name="fun">
+                  <label for="prioridad-sanitarios">Sanitarios</label>
+              </div>
+          </div>
+          <div class="column">
+              <div class="ui checkbox column">
+                  <input ng-model="prioridadesSeleccionadas.aulas" id="prioridad-aulas" type="checkbox" name="fun">
+                  <label for="prioridad-aulas">Aulas</label>
+              </div>
+          </div>
+          <div class="column">
+              <div class="ui checkbox column">
+                  <input ng-model="prioridadesSeleccionadas.mobiliarios" id="prioridad-mobiliarios" type="checkbox" name="fun">
+                  <label for="prioridad-mobiliarios">Mobiliario</label>
+              </div>
+          </div>
+          <div class="column">
+              <div class="ui checkbox column">
+                  <input ng-model="prioridadesSeleccionadas.otros" id="prioridad-otros" type="checkbox" name="fun">
+                  <label for="prioridad-otros">Otros Espacios</label>
+              </div>
+          </div>
+      </div>
+    </div>
+    <!-- FIN PRIORIDAD -->
+
+    <!-- INICIO DNCP -->
+    <div class="ui labels segment teal">
+      <div class="ui teal label">Datos del DNCP</div>
+      <div class="ui checkbox" style="float: right;">
+        <input id="dncp-check" ng-model="checkFiltros.dncpCheck" ng-checked="checkFiltros.dncpCheck" ng-change="activar_filtro()" type="checkbox" name="public">
+        <label for="dncp-check"></label>
+      </div>
+      <b ng-if="checkFiltros.dncpCheck"  ng-click="checkFiltros.dncpCheck = false; activar_filtro()" style="float: right">Activado&nbsp;&nbsp;</b>
+      <b ng-if="!checkFiltros.dncpCheck" ng-click="checkFiltros.dncpCheck = true; activar_filtro()" style="float: right; opacity: 0.5">Desactivado&nbsp;&nbsp;</b>
+
+
+      <div class="row">
+        <div class="ui checkbox column">
+            <input ng-model="dncpSeleccionadas.planificaciones" id="dncp-planificados" type="checkbox" name="fun">
+            <label for="dncp-planificados">Planificaciones</label>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="ui checkbox column">
+            <input ng-model="dncpSeleccionadas.adjudicaciones" id="dncp-adjudicados" type="checkbox" name="fun">
+            <label for="dncp-adjudicados">Adjudicaciones</label>
+        </div>
+      </div>
+      <br>
+
+    </div>
+    <!-- FIN DNCP -->
+
+    <!-- INICIO ESTADO DE OBRAS -->
+    <div class="ui labels segment teal">
+      <div class="ui teal label">Estado de obras</div>
+      <div class="ui checkbox" style="float: right;">
+        <input id="estado-check" ng-model="checkFiltros.estadoCheck" ng-checked="checkFiltros.estadoCheck" ng-change="activar_filtro()" type="checkbox" name="public">
+        <label for="estado-check"></label>
+      </div>
+      <b ng-if="checkFiltros.estadoCheck" ng-click="checkFiltros.estadoCheck = false; activar_filtro()" style="float: right">Activado&nbsp;&nbsp;</b>
+      <b ng-if="!checkFiltros.estadoCheck" ng-click="checkFiltros.estadoCheck = true; activar_filtro()" style="float: right; opacity: 0.5">Desactivado&nbsp;&nbsp;</b>
+{#        <div class="row">#}
+        <div class="ui item filtros checkbox">
+            <input ng-model="estadosSeleccionados.informes" id="dncp-informe" type="checkbox" name="fun">
+            <label for="dncp-informe">Con informe de la contraloria</label>
+        </div>
+{#      </div>#}
+        <br>
+        <br>
+      <div class="item filtros" style="margin-bottom: 5px">
+          <select ng-model="estadosSeleccionados.estado" class="ui fluid dropdown">
+              <option value="">Estado</option>
+              <option value="todos">Todos</option>
+              <option value="priorizado">Priorizado</option>
+              <option value="planificado">Planificado</option>
+              <option value="adjudicado">Adjudicado</option>
+              <option value="terminado">Terminado</option>
+          </select>
+      </div>
+    </div>
+    <!-- FIN ESTADO DE OBRAS -->
+
+  </div>
+  <!-- FIN FILTROS -->
+
+  <!-- INICIO RESUMEN -->
+  <div class="thirteen wide widescreen eleven wide computer eigth wide table sixteen wide mobile column " style="min-height: 96%">
+    <div class="ui segments">
+
+      <div class="ui  segment" style="">
+          <br>
+          <br>
+          <br>
+        <div class="ui top attached massive teal label center aligned">Resumen {$ data.periodo $}</div>
+        <div class="content">
+
+          <div class="ui segment">
+            <h4 class="ui header no-anim" style="margin:0" ng-if="data.ubicaciones.length > 0">En los
+                <span ng-if="rDepartamentos.length > 0" class="no-anim">departamentos de
+                    <span class="ui large basic teal label dep-label" ng-repeat="dep in rDepartamentos" style="padding: 5px; margin: 0 3px 5px 0">{$ dep $}</span>
+                </span>
+                <span ng-if="rDistritos.length" class="no-anim">distritos de
+                    <span class="ui large basic teal label dep-label" ng-repeat="dis in rDistritos" data-content="{$ rDistritosParent[$index] $}" style="padding: 5px; margin: 0 3px 5px 0">{$ dis $}</span>
+                </span>
+                <span ng-if="rBarrios.length" class="no-anim">barrios
+                    <span class="ui large basic teal label dep-label" ng-repeat="bar in rBarrios" data-content="{$ rBarriosParent[$index] $}" style="padding: 5px; margin: 0 3px 5px 0">{$ bar $}</span>
+                </span>
+
+            </h4>
+           <h4 class="ui header " style="margin:0" ng-if="data.ubicaciones.length == 0 || !data.ubicaciones">
+               En todo el territorio del Paraguay
+           </h4>
+
+            <h4 class="ui header" style="margin:0">Hubo <span class="ui large basic teal label " style="padding: 5px; margin: 0">{$ data.elegibles $}</span> instituciones elegibles por fonacide
+            priorizadas por
+                <span ng-if="data.prioridades.sanitarios" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Sanitarios</span>
+                <span ng-if="data.prioridades.aulas" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Aulas</span>
+                <span ng-if="data.prioridades.otros" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Otros espacios</span>
+                <span ng-if="data.prioridades.mobiliarios" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Mobiliarios</span>
+                <span ng-if="data.dncp.planificaciones || data.dncp.adjudicaciones" class="no-anim"> con
+                    <span ng-if="data.dncp.planificaciones" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Planificaciones</span>
+                    <span ng-if="data.dncp.planificaciones && data.dncp.adjudicaciones" class="no-anim"> y </span>
+                    <span ng-if="data.dncp.adjudicaciones" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Adjudicaciones</span>
+                    del DNCP
+                </span>
+                <span ng-if="data.estados.estado || data.estados.informes" class="no-anim">
+                    cuyos estados de obra
+                    <span ng-if="data.estados.estado" class="no-anim"> son </span>
+                    <span ng-if="data.estados.estado" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">{$ data.estados.estado | capitalize $}</span>
+                    <span ng-if="data.estados.estado && data.estados.informes" class="no-anim"> y </span>
+                    <span ng-if="data.estados.informes" class="ui large basic teal label no-anim" style="padding: 5px; margin: 0 3px 5px 0">Cuentan con informes de la Contraloría</span>
+                </span>
+            </h4>
+
+
+
+           </div>
+        </div>
+          <div class="ui segment">
+{#        <div class="content">#}
+{#          <h2 class="header center aligned"></h2>#}
+          <div class="ui two columns centered grid">
+{#            <div class=" row">#}
+                <div class="sixteen wide mobile sixteen wide tablet sixteen wide computer eight wide large screen eight wide widescreen column">
+                    <div class="chart-item ui horizontal segment" id="chart-sanitarios"></div>
+                </div>
+                <div class="sixteen wide mobile sixteen wide tablet sixteen wide computer eight wide large screen eight wide widescreen column">
+                    <div class="chart-item ui horizontal segment" id="chart-aulas"></div>
+                </div>
+                <div class="sixteen wide mobile sixteen wide tablet sixteen wide computer eight wide large screen eight wide widescreen column">
+                    <div class="chart-item ui horizontal segment" id="chart-otros"></div>
+                </div>
+                <div class="sixteen wide mobile sixteen wide tablet sixteen wide computer eight wide large screen eight wide widescreen column">
+                    <div class="chart-item ui horizontal segment" id="chart-mobiliarios"></div>
+                </div>
+{#            </div>#}
+          </div>
+        </div>
+{#      </div>#}
+      </div>
+
+    </div>
+    <div class="ui active inverted dimmer no-anim" style="background: white" ng-if="sin_datos">
+        <h2 class="ui icon header" style="position: absolute;top:50%; left: 50%;-webkit-transform: translateX(-50%)translateY(-50%);
+  -ms-transform: translateX(-50%)translateY(-50%);
+  transform: translateX(-50%)translateY(-50%);">
+        <i class="refresh icon"></i>
+        Haz click en actualizar!
+        </h2>
+    </div>
+    <div class="ui active inverted dimmer" style="background: rgba(256,256,256, 0.40);" ng-show="loading">
+        <div class="ui large text loader">Cargando</div>
+    </div>
+
+
+
+
+    </div>
+
+
+
+  </div>
+  <!-- FIN RESUMEN -->
+</div>
+<script>
+    $('.item.filtros .ui.dropdown').dropdown();
+</script>

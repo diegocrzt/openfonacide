@@ -1,0 +1,158 @@
+{% load staticfiles %}
+<html>
+
+    <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <title>Contralor Fonacide - MEC</title>
+        <meta name="description" content="Con esta herramienta podrás encontrar toda la información referente a los requerimientos de infraestructura de las instituciones priorizadas por la MicroPlanificación del MEC." />
+        <meta name="keywords" content="" />     
+        <meta name="author" content="MEC" />
+
+
+
+        <meta property="og:title" content="Contralor Fonacide" />
+        <meta property="og:site_name" content="Contralor Fonacide"/>       
+        <meta property="og:url" content="http://mec.gov.py/contralorfonacide/" />
+        <meta property="og:image" content="http://mec.gov.py{% static 'img/fonacide.png' %}" />
+        <meta property="article:author" content="https://www.facebook.com/MECDigital" />
+        <meta property="article:publisher" content="https://www.facebook.com/MECDigital" />
+
+    <link rel="stylesheet" type="text/css" media="screen" href="{% static 'css/ui.jqgrid.css' %}" />
+        <base href="{% url 'index' %}">
+        <link href="{% static 'semantic.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/leaflet.css' %}" rel="stylesheet">
+        <link href="{% static 'css/leaflet.groupedlayercontrol.min.css' %}" rel="stylesheet">
+        <link href="{% static 'leaflet.awesome-markers.css' %}" rel="stylesheet">
+        <link href="{% static 'css/MarkerCluster.css' %}" rel="stylesheet">
+        <link href="{% static 'css/custom.css' %}" rel="stylesheet">
+        <link href="{% static 'js/introjs.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/leaflet-sidebar.min.css' %}" rel="stylesheet">
+        <link href="{% static 'css/icon-fonacide.css' %}" rel="stylesheet">
+        <link href="{% static 'jquery.nouislider.min.css' %}"  rel="stylesheet">
+        <link href="{% static 'jquery.nouislider.pips.min.css' %}"  rel="stylesheet">
+        <link rel="shortcut icon" type="image/png" href="{% static 'img/favicon.png' %} "/>
+
+    </head>
+<style type="text/css">
+
+
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+    -webkit-border-radius: 3px;
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(200,200,200,0.8); 
+  /*  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); */
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255,0,0,0.4); 
+}
+
+</style>
+
+    <body id="ng-app" ng-app="frontEnd"  ng-controller="PageController">
+        <!--[if IE]>
+            <div class="ui visible warning message">
+                Esta página se ve mejor con la nueva versión de <a href="https://www.google.es/chrome/">Google Chrome</a>!
+            </div>
+        <![endif]-->
+        <!-- Your site -->
+        <div site-nav ng-show="$location.path() != '/'"></div>
+        {% if form.errors %}
+        <span ng-init="errors = true"></span>
+        {% endif %}
+
+        <div id="ng-view" ng-view style="margin-top:40px;" ></div>
+        <div archivos-contraloria></div>
+        <div agregar-adjudicacion></div>
+        <div login-modal></div>
+        <div denuncia-modal></div>
+        <!-- Your site ends -->
+
+        <!--[if IE]>
+        <script src="{% static 'js/jquery-1.11.3.min.js' %}"></script>
+        <![endif]-->
+        <![if !IE]>
+        <script src="{% static 'js/jquery.min.js' %}"></script>
+        <![endif]>
+        <script src="{% static 'js/jquery.dataTables.min.js' %}"></script>
+        <script src="{% static 'jquery.nouislider.all.min.js' %}"></script>
+
+        <script src="{% static 'js/leaflet.js' %}"></script>
+        <script src="{% static 'js/leaflet.groupedlayercontrol.min.js' %}"></script>
+        <script src="{% static 'js/leaflet.markercluster.js' %}"></script>
+        <script src="{% static 'leaflet.awesome-markers.min.js' %}"></script>
+        <script src="{% static 'js/angular.min.js' %}"></script>
+        <script src="{% static 'js/angular-resource.min.js' %}"></script>
+        <script src="{% static 'js/angular-cookies.min.js' %}"></script>
+        <script src="{% static 'js/angular-route.min.js' %}"></script>
+        <script src="{% static 'js/angular-animate.min.js' %}"></script>
+         <script src="{% static 'js/angular-scroll.min.js' %}"></script>
+        <script src="{% static 'js/angular-datatables.min.js' %}"></script>
+        <script src="{% static 'js/angular-datatables.columnfilter.min.js' %}"></script>
+        <script src="{% static 'semantic.min.js' %}"></script>
+        <!--<script src="{% static 'js/intro.min.js' %}"></script>-->
+        <script src="{% static 'js/jsonh.js' %}"></script>
+        <script src="{% static 'js/frontend.js' %}"></script>
+        <script src="{% static 'js/frontend.MapController.js' %}"></script>
+        <script src="{% static 'js/frontend.config.js' %}"></script>
+        <script src="{% static 'js/frontend.service.js' %}"></script>
+        <script src="{% static 'js/frontend.directive.js' %}"></script>
+        <script src="{% static 'js/frontend.PageController.js' %}"></script>
+        <script src="{% static 'js/frontend.RecuperarController.js' %}"></script>
+        <script src="{% static 'js/frontend.ResultadosController.js' %}"></script>
+        <script src="{% static 'js/frontend.ResumenController.js' %}"></script>
+        <script src="{% static 'echarts/echarts.js' %}"></script>
+        <script src="{% static 'js/frontend.MatchController.js' %}"></script>
+        <script src="{% static 'js/frontend.UnMatchController.js' %}"></script>
+        <script src="{% static 'echarts/echarts-all.js' %}"></script>
+
+
+
+         <div footer-info></div>
+    <script>
+        // Uppercase every first letter of a word
+        jQuery.fn.ucwords = function() {
+          return this.each(function(){
+            var val = $(this).text().toLowerCase(), newVal = '';
+            val = val.split(' ');
+
+            for(var c=0; c < val.length; c++) {
+              newVal += val[c].substring(0,1).toUpperCase() + val[c].substring(1,val[c].length) + (c+1==val.length ? '' : ' ');
+            }
+            $(this).text(newVal);
+          });
+        }
+
+    </script>
+
+     <!-- GOOGLE ANALYTICS -->
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-63760506-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+    </body>
+
+</html>

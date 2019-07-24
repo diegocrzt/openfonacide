@@ -1,24 +1,87 @@
-<div class="ui large inverted blue pointing menu">
-    <a class="blue item"  ng-class="{active:isTab('home')}"  ng-click="setTab('home')">
-        <i class="home icon"></i> OpenFonacide
-    </a>
-    <a class="blue item" ng-class="{active:isTab('api')}" ng-click="setTab('api')">
-        <i class="puzzle icon"></i> API
-    </a>
-    <a class="blue item" ng-class="{active:isTab('map')}" ng-click="setTab('map')">
-        <i class="map icon"></i> Mapa de instituciones
-    </a>
-    <a class="blue item" ng-class="{active:isTab('instituciones')}" ng-click="setTab('instituciones')">
-        <i class="list icon"></i> Lista de instituciones
-    </a>
+{% load staticfiles %}
 
-    <div class="right menu">
-        <div class=" item">
-            <div class="ui icon input">
-                <input type="text" placeholder="Search...">
-                <i class="search link icon"></i>
+<div class="ui grid" style="margin:0">
+    <div class="computer tablet only row" style="padding: 0">
+        <div class="ui inverted teal large menu navbar fixed top sticky " style="z-index: 99999">
+            <a href="{% url 'index' %}" class="brand item">Contralor de Fonacide <i class="unhide icon"></i></a>
+            <a href="{% url 'index' %}" class="item"><i class="home icon"></i>Inicio</a>
+            <a href="map" class="item" ng-class="{active: $location.path().match('/?map.*') != null}"><i class="marker icon"></i> Mapa</a>
+            <a href="informacion" class="item"  ng-class="{active: $location.path().match('/?informacion.*') != null}"><i class="info circle icon"></i> Información</a>
+            <a href="graficos" class="item" ng-class="{active: $location.path().match('/?graficos.*') != null}"><i class="bar chart icon"></i> Gráficos</a>
+            <a href="resumen" class="item" ng-class="{active: $location.path().match('/?resumen.*') != null}"><i class="table icon"></i> Resumen</a>
+			{% if user.is_authenticated %}
+			<div class="ui simple dropdown item">
+				<i class="wizard icon"></i>Vincular
+				<div class="menu" style="z-index: 5000;">
+                	<a href="match" class="item" ng-class="{active: $location.path().match('/?match.*') != null}"><i class="wizard icon"></i>Vincular de Instituciones</a>
+                	<a href="linkbreak" class="item" ng-class="{active: $location.path().match('/?linkbreak.*') != null}"><i class="wizard icon"></i>Desvincular de Instituciones</a>
+				</div>
+			</div>
+			{% endif %}
+
+            <div class="right menu">
+            {% if user.is_authenticated %}
+                <div class="item">
+                    <i class="user icon"></i>{{ user.username | upper }}
+                </div>
+                    <a href="" class="item"  onclick="_logout()"><i class="sign out icon"></i>Cerrar Sesión</a>
+            {% else %}
+                <a href="" class="item"  onclick="$('.login.modal').modal('show')"><i class="sign in icon"></i>Iniciar Sesión</a>
+            {% endif %}
             </div>
+
+        <div search class="item" style="float: right;width: 350px;padding: 0" input-class="large"></div>
+
+
+        </div>
+
+    </div>
+    <div class="mobile only row" style="padding: 15px;">
+        <div class="ui inverted teal large menu navbar fixed top sticky" style="z-index: 99999">
+            <div search  class="item" style="padding: 0; width: 100%" input-class="large"></div>
+            <a href="{% url 'index' %}" class="brand item"><i class="unhide icon"></i></a>
+
+            <div class="right menu open" onclick="$('.vmenu').toggle()">
+                {% if user.is_authenticated %}
+                    <div class="item">
+                        <i class="user icon"></i>{{ user.username | upper }}
+                    </div>
+                    <a href="" class="item"  onclick="_logout()"><i class="sign out icon"></i>Cerrar Sesión</a>
+                {% else %}
+                    <a href="" class="item"  onclick="$('.login.modal').modal('show')"><i class="sign in icon"></i>Iniciar Sesión</a>
+                {% endif %}
+                <a href="" class="open item">
+                    <i class="content icon"></i>
+                </a>
+            </div>
+
+            <div class="vmenu" style="display: none">
+
+                <a class="item" style="width: 100%" onclick="$('.login.modal').modal('show')"><i class="sign out icon"></i>Cerrar Sesion</a>
+                <a href="{% url 'index' %}" class="item" style="width: 100%"><i class="home icon"></i>Inicio</a>
+                <a href="map" ng-class="{active: $location.path().match('/?map.*') != null}" class="item"  style="width: 100%"><i class="marker icon"></i> Mapa</a>
+                <a href="informacion" ng-class="{active: $location.path().match('/?infromacion.*') != null}" class="item" style="width: 100%"><i class="info circle icon"></i> Información</a>
+                <a href="graficos" ng-class="{active: $location.path().match('/?graficos.*') != null}" class="item" style="width: 100%"><i class="bar chart icon"></i> Gráficos</a>
+                <a href="resumen" ng-class="{active: $location.path().match('/?resumen.*') != null}" class="item" style="width: 100%"><i class="table icon"></i> Resumen</a>
+
+                <div class="menu">
+                </div>
+            </div>
+
         </div>
 
     </div>
 </div>
+<script>
+
+    function _logout(){
+        document.location="{% url 'logout' %}"
+    }
+    $(function () {
+        $('.vmenu').hide();
+{#        $('.dropdown').dropdown();#}
+        $('.right.menu.open .open').on("click", function (e) {
+            e.preventDefault();
+        });
+    })
+</script>

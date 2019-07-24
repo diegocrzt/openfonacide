@@ -1,0 +1,56 @@
+{% block top %}
+
+<div class="ui login small modal">
+    <i class="close icon"></i>
+
+    <div class="header">
+        Iniciar Sesion
+    </div>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="content">
+            <div class="column">
+                    <div class="ui negative message" ng-show="errors">
+                        <div class="header">
+                            El usuario o password es incorrecto.
+                        </div>
+                        <p>
+                            Porfavor vuelva a intentar.
+                        </p>
+                    </div>
+                <form class="ui form" role="form" autocomplete="on" method="post" action="{% url 'django.contrib.auth.views.login' %}?next={% url 'index' %}">
+                    {% csrf_token %}
+                    <div class="field">
+                        <label>Usuario</label>
+
+                        <div class="ui left icon input">
+                            <input type="text" name="username" placeholder="Usuario">
+                            <i class="user icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+                        <label>Contraseña</label>
+
+                        <div class="ui left icon input">
+                            <input type="password" name="password" placeholder="Contraseña">
+                            <i class="lock icon"></i>
+                        </div>
+                    </div>
+                    <div class="field">
+
+                    </div>
+                    <button type="submit" class="ui blue submit button">Entrar</button>
+                    <button type="button" class="ui basic red button link" onclick="window.location='{% url 'recuperar_pass' %}'">Olvide mi Contraseña</button>
+
+                </form>
+            </div>
+    </div>
+
+{% endblock %}
+
+{% block bottom %}
+</div>
+{% endblock %}

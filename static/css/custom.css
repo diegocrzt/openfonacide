@@ -1,20 +1,43 @@
 
-
-.content,#map,#loading_map{
-    height: 96%;
+body {
+   /* background-color: #e4f1fe*/
 }
 
-.container{
-    /*width: 100%;*/
-    background-color: white;
-    border: 1px solid #3b83c0;
-    padding: 0;
+.teal-link{
+    color: white;
+}
+.teal-link:hover{
+    color: #446cb3
+}
+
+a {
+    color: #59abc3
+}
+a:hover {
+    color: #446cb3
+}
+
+.search .input input {
+    border-radius: 3px !important;
+}
+
+
+
+
+#map,#loading_map{
+    /*margin-top: 35px;*/
+    height: calc(100% - 35px);
+}
+
+body.pushable {
+
+    background-color: inherit !important;
 }
 
 .mycluster{
     	width: 40px;
         height: 40px;
-        background-color: #3b83c0;
+        background-color: #00b5ad;
         text-align: center;
         font-size: 20px;
         border-radius: 30px;
@@ -22,6 +45,247 @@
         padding-top: 5px;
 }
 
+.university.icon.margin-left{
+    margin-left: 0.3rem;
+}
+
 .link{
     font-size: 1.3em;
+}
+
+.botones-prinicpales i {
+
+    font-size: 10vw;
+
+
+}
+
+.filtro .ui.teal.label{
+    margin-right: 0 !important;
+}
+
+.circular.info.link{
+    margin-right: 0;
+}
+
+.botones-prinicpales h3 {
+    color: teal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -o-text-overflow: ellipsis;
+}
+
+
+.botones-prinicpales p{
+    margin-top: 10px;
+    font-size: 1.5em;
+}
+
+.sidebar .ui.checkbox label {
+    color: white !important;
+}
+
+.margenBTN {
+
+    margin-bottom: 50px;
+
+    margin-top: 130px;
+}
+
+.sidebar .filtros {
+    margin: 30px 0px;
+   text-align: left !important;
+padding-left: 35px !important;
+}
+.sidebar .filtros.dropdown {
+    /*margin: 30px 0px;*/
+   text-align: left !important;
+}
+.sidebar .dropdownn {
+    padding-bottom: 0px !important;
+
+}
+
+.ui.tabular.menu .item{
+position: relative;
+background-color: #ddd;
+color: rgba(0,0,0,.8);
+border-color: #d4d4d5;
+font-weight: 700;
+margin-bottom: -1px;
+border-bottom: 1px solid #fff;
+box-shadow: none;
+border-radius: 5px 5px 0 0;
+    cursor: pointer;
+}
+
+.ui.tabular.menu .item:hover {
+ background-color: white;
+color: rgba(0,0,0,.8);
+}
+
+
+div.ui.requerimiento.stackable.grid.segment {
+background: whitesmoke;
+}
+
+
+.requerimiento p {
+text-align: left;
+}
+
+
+input[type="range"] {
+    -webkit-appearance: none;
+    border-width: 1px;
+    border-style: solid;
+    border-radius: 50rem;
+    border-color: rgba(0, 0, 0, 0.1);
+    padding: 3px 5px;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    background: #89B84C;
+    border-radius: 50rem;
+    height: 0.7em;
+    width: 0.7em;
+}
+
+.menu-principal {
+    margin:0px !important;
+}
+
+footer {
+    /*color: #ffffff !important; */
+}
+
+/* Hide on Mobile */
+@media only screen and (max-width: 767px) {
+    .hide-mobile{
+        display: none;
+    }
+}
+/*Barra de SCROLL*/
+
+
+
+/* Let's get this party started */
+::-webkit-scrollbar {
+    width: 10px;
+}
+ 
+/* Track */
+::-webkit-scrollbar-track {
+   /* -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3); */
+    -webkit-border-radius: 3px;
+    border-radius: 5px;
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    background: rgba(200,200,200,0.8); 
+  /*  -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.5); */
+}
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(100,100,100,0.4); 
+}
+
+/*Barra de SCROLL*/
+/* FIXED NAV */
+
+@media screen and (min-width: 795px)  and (max-width: 1200px) {
+
+    #ng-view{
+       margin-top: 75px !important;
+
+}
+}
+/* END FIXED NAV */
+
+/* SIDEBAR SIZE */
+/* tablet */
+@media only screen and (min-width: 768px) and (max-width: 991px) {
+    .detalle.sidebar{
+        width: 100% !important;
+    }
+    .filtro.sidebar{
+        width: 355px !important;
+    }
+}
+
+/* mobile */
+@media only screen and (max-width: 767px) {
+    .detalle.sidebar{
+        width: 100% !important;
+    }
+
+    .filtro.sidebar{
+        width: 100% !important;
+    }
+}
+
+/* computer */
+@media only screen and (min-width: 992px) {
+    .detalle.sidebar{
+        width: 65% !important;
+    }
+
+    .filtro.sidebar{
+        width: 355px !important;
+    }
+}
+
+
+.verde1 {
+    background: #00b5ad !important;
+}
+
+.verde2 {
+    background: #019875 !important;
+}
+
+
+/*Search*/
+
+.search .dropdown{
+  /*padding-top: 0.4em;*/
+}
+
+.results.ui.styled.accordion .item .content{
+    padding: 0;
+}
+.results.ui.styled.accordion .item:first-child {
+    border-top: none;
+}
+.results.ui.styled.accordion .item {
+    margin:0;
+    border-top: 1px solid rgba(39,41,43,.15);
+}
+.highlight{
+    background: #ffff00;
+}
+.highlight.blue, .label .highlight{
+    background: #4E4C89;
+}
+
+
+.leaflet-top, .leaflet-bottom {
+position: absolute;
+z-index: 900;
+pointer-events: none;
+}
+
+/* Footer */
+.footer-info {
+    margin: 0% !important;
+}
+
+
+/* 'ng-anim' Para evitar la animacion de ng-show, ng-hide, ng-if */
+.no-anim.ng-move,
+.no-anim.ng-leave {
+    display: none !important;
 }

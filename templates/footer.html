@@ -1,26 +1,70 @@
 {% load staticfiles %}
-<footer class="">
-    <div class="ui left aligned grid">
-        <div class="right floated right aligned six wide column" style="padding-bottom: 0">
-            {#    <div class="ui segment">#}
-            <b>Codigo Fuente:</b><a href="https://github.com/nemesiscodex/openfonacide"> Github</a>
-            {#    </div>#}
-        </div>
-        <div class="left floated left aligned six wide column" style="padding-bottom: 0">
-            {#    <div class="ui segment">#}
-            <b>Autor:</b> Julio Reyes &lt;<a href="mailto:nemesiscodex@gmail.com">nemesiscodex@gmail.com</a>&gt;
-            {#    </div>#}
-        </div>
-        <div class="sixteen wide column">
-            {#        <div class="ui segment">#}
+<div class="footer-info ui inverted teal footer vertical segment" style="margin-left: 0;margin-right: 0">
+    <div class="container" style="padding: 20px">
+        <div class="ui stackable inverted divided relaxed grid" style="margin-right: 0">
+            <div class="eight wide column">
 
 
-<div class="ui segment" style="font-size: 8pt;color: #fe897e"><img src="{% static 'js/images/datos-abiertos.png' %}" height="20px">
-    ★ Este software se entrega sin garantía alguna, con la esperanza de que sea util, ante cualquier duda consulte la <a href="http://datos.mec.gov.py/data/establecimientos">fuente original</a> de los datos. Cualquier corrección o sugerencia es bienvenida, en forma de parche o pull request al repositorio.
-</div>
+                <div class="ui stackable three cards" style="padding-top:15px;">
+                    <div class="ui card" style="background: transparent; box-shadow: none">
+                        <img src="{% static 'img/logo-innovando.png' %}" alt="" class="ui image"
+                             style="margin-top:13%;margin-bottom:13%; background: transparent"/>
+                    </div>
 
-            {#</div>#}
+                    <div class="ui card" style="background: transparent; box-shadow: none">
+                        <img src="{% static 'img/mec.png' %}" alt="" class=" ui image "
+                                style=" background: transparent" />
+                    </div>
+
+                    <div class="ui card" style="background: transparent; box-shadow: none">
+                        <img src="{% static 'img/logo-gobierno.png' %}" alt="" class="ui image"
+                                 style=" background: transparent" />
+                    </div>
+
+                </div>
+
+                
+               
+
+            </div>
+
+            <div class="eight wide column">
+
+              <p>Desarrollado con el apoyo del <a class="teal-link"
+                        href="http://ceamso.org.py/es/proyectos/20-programa-de-democracia-y-gobernabilidad "
+                        target="_blank">Programa de Democracia y Gobernabilidad (USAID-CEAMSO)</a></p>
+
+             <div class="ui grid">
+            <div class="eight wide column">
+                <h5 class="ui teal inverted header">Otros enlaces</h5>
+
+                <div class="ui inverted link list">
+                    <a  href="acercade" style="color:white;">Acerca de</a> -
+                    <a  href="legal"  style="color:white;" >Legal</a> -
+                    <a href="datasets"  style="color:white;" >Datasets</a> -
+                    {% if user.is_staff %}
+                    <a  href="admin/" target="_self" style="color:white;">Admin</a> -
+                    {% endif %}
+                    <a  href="api/" target="_self"  style="color:white;">API</a> -
+                    {% if user.is_authenticated %}
+                    <a  href="" onclick="_logout()" style="color:white;">Cerrar Sesión</a>
+                    {% else %}
+                    <a  href="" onclick="$('.login.modal').modal('show')" style="color:white;">Iniciar Sesión</a>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="eight wide column">
+
+                <h5 class="ui teal inverted header">Contribuir</h5>
+
+                <div class="ui inverted link list">
+                    <a class="item" href="http://github.com/ceamso/openfonacide">Github</a>    
+
+                    
+                </div>
+            </div>
+            </div>
+            </div>
         </div>
     </div>
-
-</footer>
+</div>

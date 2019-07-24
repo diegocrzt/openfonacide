@@ -1,0 +1,231 @@
+<div class="ui category labeled search">
+    <div class="ui left labeled fluid input">
+        <div class="ui dropdown teal busqueda label">
+            <div class="text">
+                <i class="search icon" style="margin-right: 5px"></i>
+                <i class="dropdown icon" style="margin: 0"></i>
+            </div>
+
+
+            <div class="menu" style="z-index: 1010">
+                <div class="item" href="#">Todos</div>
+                <div class="item">Código de institución</div>
+                <div class="item">Nombre de institución</div>
+                <div class="item">Dirección</div>
+                <div class="item">Distrito</div>
+                <div class="item">Barrio</div>
+            </div>
+        </div>
+        <input class="prompt" type="text" placeholder="Institución">
+        <a class="ui teal label close-results" style="border-radius: 0 3px 3px 0" onclick="ocular_resultados()">&#x2716;</a>
+
+    </div>
+    <div class="results ui styled accordion" style="z-index: 1022; width: 100% "></div>
+</div>
+{#<div class="ui category labeled search fluid" style="font-size:14px">#}
+{##}
+{#    <div class="ui floating dropdown button teal busqueda" style="padding-left: 10px;padding-right: 10px;margin:0">#}
+{#        <div class="text">Buscar</div>#}
+{#        <i class="dropdown icon"></i>#}
+{##}
+{#        <div class="menu" style="z-index: 1022">#}
+{#            <div class="item" href="#">Todos</div>#}
+{#            <div class="item">Código de institución</div>#}
+{#            <div class="item">Nombre de institución</div>#}
+{#            <div class="item">Dirección</div>#}
+{#            <div class="item">Distrito</div>#}
+{#            <div class="item">Barrio</div>#}
+{#        </div>#}
+{#    </div>#}
+{#    <div class="ui icon input" >#}
+{##}
+{#        <input class="prompt" style="width: 100%" type="text" placeholder="Institución">#}
+{#        <i class="search icon"></i>#}
+{#    </div>#}
+{##}
+{#    <div class="results ui styled accordion" style="z-index: 1022"></div>#}
+{#</div>#}
+
+<script>
+    function ocular_resultados(){
+        var $results = $('.results');
+        $results.removeClass('visible');
+        $('.results').addClass('hidden');
+        $('.close-results').hide();
+    }
+    $('body').keyup(function(event){
+      //ESC
+      if(event.keyCode == 27){
+        ocular_resultados();
+      }
+    });
+
+    function configurar_busqueda(url, minCharacters, tipo){
+        var message = function(message, type) {
+                        var
+                                html = ''
+                                ;
+                        if (message !== undefined && type !== undefined) {
+                            html += ''
+                            + '<div class="message ' + type + '">'
+                            ;
+                            // message type
+                            if (type == 'empty') {
+                                html += ''
+                                + '<div class="header">Sin resultados.</div class="header">'
+                                + '<div class="description">' + message + '</div class="description">'
+                                ;
+                            }
+                            else {
+                                html += ' <div class="description">' + message + '</div>';
+                            }
+                            html += '</div>';
+                        }
+                        return html;
+                    };
+        $('.close-results').hide();
+        $('.ui.category.search')
+            .search({
+                apiSettings: {
+                    url: url
+                },
+                minCharacters: minCharacters,
+                cache: false,
+                onResultsOpen: function(){
+                    $('.close-results').show();
+                },
+                onResultsClose: function(){
+                    $('.close-results').hide();
+                },
+                templates: {
+                    message: message,
+                    standard: function (response) {
+                        var query = response.query.toUpperCase();
+                        var tipo = response.tipo;
+                        if(tipo == 'null' || tipo == null || tipo == undefined){
+                            tipo = '';
+                        }
+                        var total_resultdos = 0;
+                        var query_replace = '<span class="highlight">'+query+'</span>';
+                        var html = '',
+                                escape = $.fn.search.settings.templates.escape
+                                ;
+                        var open = true;
+                        if (response.results !== undefined) {
+                            // each category
+                            $.each(response.results, function (index, category) {
+                                if (category.results !== undefined && category.results.length > 0) {
+                                    var resultNumber = category.results.length;
+                                    total_resultdos += resultNumber;
+                                    if(category.results.length >= 5){
+                                        resultNumber = '+' + category.results.length;
+                                    }
+                                    html += ''
+                                    + '<div class="title"><i class="dropdown icon"></i><b>' + category.name + '  ('+resultNumber+' resultados)</b></div>'
+                                    + '<div class="content'+(open?' active':'')+'">'
+                                    + '<div class="ui divided list secondary vertical fluid menu">'
+                                    ;
+                                    open = false;
+                                    // each item inside category
+                                    $.each(category.results, function (index, result) {
+                                        html += '<a class="item" onclick="ocular_resultados()"  href="' + response.base_url + 'map?establecimiento=' + result.codigo_establecimiento + '&institucion=' + result.codigo_institucion + '">';
+
+                                        html += '<div class="content">';
+
+                                        if (result.nombre_institucion !== undefined) {
+                                            result.nombre_institucion = escape(result.nombre_institucion);
+                                            html += '<div class="header"><div class="ui horizontal label" title="Codigo de Institucion">' + result.codigo_institucion + '</div>' + result.nombre_institucion.replace(/&quot;/g,'').replace(query, '<span class="highlight">'+query+'</span>') + '</div>';
+                                        }
+                                        if (result.direccion !== undefined) {
+                                            html += '<div class="description">' + result.direccion.replace(query, '<span class="highlight">'+query+'</span>') + '</div>';
+                                        }
+                                        if (result.nombre_distrito !== undefined) {
+                                            html += '<div class="ui teal horizontal label" title="Distrito">' + result.nombre_distrito.replace(query, '<span class="highlight blue">'+query+'</span>') + '</div>';
+                                        }
+                                        if (result.nombre_barrio_localidad !== undefined) {
+                                            html += '<div class="ui green horizontal label" title="Barrio/Localidad">' + result.nombre_barrio_localidad.replace(query, '<span class="highlight blue">'+query+'</span>') + '</div>';
+                                        }
+                                        html += ''
+                                        + '</div>'
+                                        + '</a>'
+                                        ;
+                                    });
+                                    html += ''
+                                    + '</div>'
+                                    + '</div>'
+                                    + '<script>'
+                                    + "$('.ui.category.search .results').accordion('refresh')" + "<\/script>"
+                                    ;
+                                }
+                            });
+                            if(total_resultdos === 0)
+                                return message("Su busqueda no produjo resultados.", 'empty result');
+                            response.action = {
+                                url: 'results/?q='+query + '&type=' +tipo,
+                                text: 'Mostrar todos los resultados'
+                            };
+                            if (response.action) {
+                                html += ''
+                                + '<a href="' + response.action.url + '" onclick="ocular_resultados()" class="action">'
+                                + response.action.text
+                                + '</a>';
+                            }
+                            return html;
+                        }
+                        return false;
+                    }
+                }
+            })
+            .keypress(function(event){
+              if (event.which == 13) {
+                window.location.href = 'results/?q='+$(this).find('input').val()+'&type='+tipo;
+              }
+            })
+    ;
+    }
+    configurar_busqueda('institucion/?q={query}&cantidad=5', 4, '');
+
+
+
+    $('.dropdown.busqueda')
+  .dropdown({
+    // you can use any ui transition
+    transition: 'drop',
+
+    action: function(value, text) {
+      // custom action
+        var placeholder = '';
+        if(text == 'todos'){
+            placeholder = 'Institución';
+        }else{
+            placeholder = 'Por ' + text
+        }
+        switch (text){
+            case 'todos':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5', 4, '');
+                break;
+            case 'código de institución':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5&tipo=codigo', 1, 'codigo');
+                break;
+            case 'nombre de institución':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5&tipo=nombre', 4, 'nombre');
+                break;
+            case 'dirección':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5&tipo=direccion', 4, 'direccion');
+                break;
+            case 'distrito':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5&tipo=distrito', 4, 'distrito');
+                break;
+            case 'barrio':
+                    configurar_busqueda('institucion/?q={query}&cantidad=5&tipo=barrio', 4, 'barrio');
+                break;
+        }
+       $(".prompt").attr("placeholder", placeholder  );
+        $('.dropdown.busqueda').dropdown('hide');
+    }
+
+  })
+;
+
+
+</script>

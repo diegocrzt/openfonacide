@@ -1,22 +1,56 @@
 {% load staticfiles %}
-<div id="home" class="content row" style="padding: 20px">
+<div id="home " class="content" style="padding: 20px; padding-bottom: 100px;">
 
-    <h1><img src="{% static 'js/images/datos-abiertos.png' %}" height="50px"/> <b>Open Fonacide</b></h1>
-    <hr>
-    <h3>Descripcion del Servicio</h3>
+    <div class="ui centered grid">
 
-    <p></p>
+        <div class="eight wide computer fourteen wide mobile tablet column centered ">
+            <div class="sixteen wide column">
+                <img src="{% static 'img/logo.png' %}" alt="" class="ui svg image"/>
+            </div>
+        </div>
 
-    <h3>Objetivo</h3>
+        <div class="eight wide computer fourteen wide mobile tablet column centered ">
+            <div class="sixteen wide column">
+               <p>Con esta herramienta podrás encontrar toda la información referente a los requerimientos de infraestructura de las instituciones priorizadas por la MicroPlanificación del MEC.</p>
 
-    <p>
-        El objetivo de esta pagina es
-    </p>
+               <p><b>Podés comenzar buscando una institución o distrito. ▼</b> </p>
+            </div>
+        </div>
 
-    <h3>Fuente de datos</h3>
+        <div class="eight wide computer sixteen wide mobile tablet column centered right ">
+            <div search class="item"></div>
+           
 
-    <p>
-        Los datos fueron obtenidos de la fuente oficial (<a href="http://datos.mec.gov.py/data/establecimientos">MEC</a>)
-        y corresponden al año 2012
-    </p>
+        </div>
+
+    </div>
+    <br>
+    <br>
+    <div class="ui four cards doubling botones-prinicpales">
+        <a href="map" class="teal card">
+            <div class="content">
+                <div class="header teal center aligned"><i class="info marker teal icon"></i></div>
+                <h3 class="center aligned">MAPA</h3>
+            </div>
+        </a>
+        <a href="informacion" class="teal card">
+            <div class="content">
+                <div class="header teal center aligned"><i class="info circle teal icon"></i></div>
+                <h3 class="center aligned">INFORMACIÓN</h3>
+            </div>
+        </a>
+        <a href="graficos" class="teal card">
+            <div class="content">
+                <div class="header teal center aligned"><i class="bar chart teal icon"></i></div>
+                <h3 class="center aligned">GRÁFICOS</h3>
+            </div>
+        </a>
+        <a href="resumen" class="teal card">
+            <div class="content">
+                <div class="header teal center aligned"><i class="table teal icon"></i></div>
+                <h3 class="center aligned">RESUMEN</h3>
+            </div>
+        </a>
+    </div>
+
 </div>

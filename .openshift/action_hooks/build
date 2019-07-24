@@ -5,5 +5,13 @@
 # could be python, php, ruby, etc.
 
 # Activate VirtualEnv in order to use the correct libraries
+source $OPENSHIFT_HOMEDIR/python/virtenv/bin/activate
 
 echo "--> ACTION HOOK: build <--"
+pip install -r "$OPENSHIFT_REPO_DIR"/requirements.txt
+
+if [ ! -d $OPENSHIFT_DATA_DIR/media ]; then
+mkdir $OPENSHIFT_DATA_DIR/media
+fi
+
+ln -sf $OPENSHIFT_DATA_DIR/media $OPENSHIFT_REPO_DIR/wsgi/static/media
